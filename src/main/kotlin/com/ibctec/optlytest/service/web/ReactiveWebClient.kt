@@ -9,6 +9,7 @@ import org.springframework.http.MediaType
 import org.springframework.http.client.reactive.ClientHttpConnector
 import org.springframework.http.client.reactive.ReactorClientHttpConnector
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import org.springframework.util.MultiValueMap
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.util.UriBuilder
@@ -16,10 +17,10 @@ import reactor.netty.http.client.HttpClient
 import java.net.URI
 import java.util.*
 
-@Component
-class ReactiveWebClient {
+@Service
+open class ReactiveWebClient {
 
-    fun getWebClient(baseUrl: String): WebClient {
+    open fun getWebClient(baseUrl: String): WebClient {
         return WebClient
                 .builder()
                 .baseUrl(baseUrl)
@@ -28,7 +29,7 @@ class ReactiveWebClient {
                 .build()
     }
 
-   fun buildUri(builder: UriBuilder, path: String, params: MultiValueMap<String, String>): URI {
+   open fun buildUri(builder: UriBuilder, path: String, params: MultiValueMap<String, String>): URI {
         return builder.path(path)
                 .queryParams(params)
                 .build()
